@@ -65,7 +65,7 @@ jobs:
         env:
           COSIGN_EXPERIMENTAL: "true"
         run: |
-          echo 'y' | cosign sign-blob artifact --output-certificate cert.pem --output-signature sig
+          echo 'y' | cosign sign-blob artifact --bundle cosign.bundle
           
     
 #       - name: Create Verify Text File
