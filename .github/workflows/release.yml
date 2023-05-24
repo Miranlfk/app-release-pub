@@ -65,7 +65,7 @@ jobs:
         env:
           COSIGN_EXPERIMENTAL: "true"
         run: |
-          output=$(echo 'y' | cosign sign-blob artifact)
+          output=$(echo 'y' | cosign sign-blob-experimental artifact)
           echo "::set-output name=outputVerification::$output"
     
       - name: Create Verify Text File
