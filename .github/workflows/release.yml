@@ -73,19 +73,19 @@ jobs:
         run: |
           cosign verify-blob artifact --bundle cosign.bundle --certificate-identity=https://github.com/Miranlfk/app-release-pub/.github/workflows/release.yml@refs/heads/publish-verification-docs --certificate-oidc-issuer=https://token.actions.githubusercontent.com
     
-#       - name: Create Verify Text File
-#         run: 'echo ${{ steps.sign-display-output.outputs.outputVerification }} > verify.txt'
+      - name: Create Verify Text File
+        run: 'echo "--certificate-identity=https://github.com/Miranlfk/app-release-pub/.github/workflows/release.yml@refs/heads/publish-verification-docs --certificate-oidc-issuer=https://token.actions.githubusercontent.com" > verify.txt'
 #       - name: Verify Text File
 #         run: cat verify.txt
-#       - name: Upload Signature to GitHub release
-#         uses: actions/upload-release-asset@v1
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         with:
-#           upload_url: ${{ steps.new-test-release-cosign.outputs.upload_url }}
-#           asset_path: ./verify.txt
-#           asset_name: verify.txt
-#           asset_content_type: application/octet-stream
+      - name: Upload Signature to GitHub release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.new-test-release-cosign.outputs.upload_url }}
+          asset_path: ./verify.txt
+          asset_name: verify.txt
+          asset_content_type: application/octet-stream
           
       - name: Upload Bundle to GitHub release
         uses: actions/upload-release-asset@v1
