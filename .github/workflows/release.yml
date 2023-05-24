@@ -58,6 +58,8 @@ jobs:
 
       - name: Sign the Release Artifact
         id: sign-display-output
+        env:
+          COSIGN_EXPERIMENTAL: "true"
         run: |
           output=$(echo 'y' | cosign sign-blob artifact)
           echo "::set-output name=outputVerification::$output"
