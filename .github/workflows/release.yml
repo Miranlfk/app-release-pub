@@ -71,10 +71,10 @@ jobs:
         env:
           COSIGN_EXPERIMENTAL: "true"
         run: |
-          cosign verify-blob artifact --bundle cosign.bundle --certificate-identity=https://github.com/Miranlfk/app-release-pub/.github/workflows/release.yml@refs/heads/publish-verification-docs --certificate-oidc-issuer=https://token.actions.githubusercontent.com
+          cosign verify-blob artifact --bundle cosign.bundle --certificate-identity=https://github.com/Miranlfk/app-release-pub/.github/workflows/release.yml@refs/heads/main --certificate-oidc-issuer=https://token.actions.githubusercontent.com
     
       - name: Create Verify Text File
-        run: 'echo "--certificate-identity=https://github.com/Miranlfk/app-release-pub/.github/workflows/release.yml@refs/heads/publish-verification-docs --certificate-oidc-issuer=https://token.actions.githubusercontent.com" > verify.txt'
+        run: 'echo "--certificate-identity=https://github.com/Miranlfk/app-release-pub/.github/workflows/release.yml@refs/heads/main --certificate-oidc-issuer=https://token.actions.githubusercontent.com" > verify.txt'
 #       - name: Verify Text File
 #         run: cat verify.txt
       - name: Upload Signature to GitHub release
