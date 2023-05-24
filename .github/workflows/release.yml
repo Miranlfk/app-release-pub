@@ -87,15 +87,15 @@ jobs:
 #           asset_name: verify.txt
 #           asset_content_type: application/octet-stream
           
-#       - name: Upload Certificate to GitHub release
-#         uses: actions/upload-release-asset@v1
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         with:
-#           upload_url: ${{ steps.new-test-release-cosign.outputs.upload_url }}
-#           asset_path: ./verify.txt
-#           asset_name: verify.txt
-#           asset_content_type: application/octet-stream
+      - name: Upload Bundle to GitHub release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.new-test-release-cosign.outputs.upload_url }}
+          asset_path: ./cosign.bundle
+          asset_name: cosign.bundle
+          asset_content_type: application/octet-stream
           
       - name: Upload asset to GitHub release
         uses: actions/upload-release-asset@v1
