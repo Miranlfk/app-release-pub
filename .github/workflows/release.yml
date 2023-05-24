@@ -71,9 +71,7 @@ jobs:
         env:
           COSIGN_EXPERIMENTAL: "true"
         run: |
-          cosign verify-blob artifact --bundle cosign.bundle 
-          --certificate-identity=https://github.com/Miranlfk/app-release-pub/.github/workflows/docker-publish.yml@refs/heads/master
-          --certificate-oidc-issuer=https://token.actions.githubusercontent.com
+          cosign verify-blob artifact --bundle cosign.bundle --certificate-identity=https://github.com/Miranlfk/app-release-pub/.github/workflows/docker-publish.yml@refs/heads/master --certificate-oidc-issuer=https://token.actions.githubusercontent.com
     
 #       - name: Create Verify Text File
 #         run: 'echo ${{ steps.sign-display-output.outputs.outputVerification }} > verify.txt'
