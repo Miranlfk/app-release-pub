@@ -65,22 +65,32 @@ jobs:
         env:
           COSIGN_EXPERIMENTAL: "true"
         run: |
-          output=$(echo 'y' | cosign sign-blob-experimental artifact)
-          echo "::set-output name=outputVerification::$output"
+          echo 'y' | cosign sign-blob artifact --output-certificate cert.pem --output-signature sig
+          
     
-      - name: Create Verify Text File
-        run: 'echo ${{ steps.sign-display-output.outputs.outputVerification }} > verify.txt'
-      - name: Verify Text File
-        run: cat verify.txt
-      - name: Upload text file to GitHub release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.new-test-release-cosign.outputs.upload_url }}
-          asset_path: ./verify.txt
-          asset_name: verify.txt
-          asset_content_type: application/octet-stream
+#       - name: Create Verify Text File
+#         run: 'echo ${{ steps.sign-display-output.outputs.outputVerification }} > verify.txt'
+#       - name: Verify Text File
+#         run: cat verify.txt
+#       - name: Upload Signature to GitHub release
+#         uses: actions/upload-release-asset@v1
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         with:
+#           upload_url: ${{ steps.new-test-release-cosign.outputs.upload_url }}
+#           asset_path: ./verify.txt
+#           asset_name: verify.txt
+#           asset_content_type: application/octet-stream
+          
+#       - name: Upload Certificate to GitHub release
+#         uses: actions/upload-release-asset@v1
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         with:
+#           upload_url: ${{ steps.new-test-release-cosign.outputs.upload_url }}
+#           asset_path: ./verify.txt
+#           asset_name: verify.txt
+#           asset_content_type: application/octet-stream
           
       - name: Upload asset to GitHub release
         uses: actions/upload-release-asset@v1
