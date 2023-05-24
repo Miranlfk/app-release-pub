@@ -20,7 +20,7 @@ jobs:
     name: Distribute Next.js project to GitHub Releases
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
       id-token: write
     needs: build-project
