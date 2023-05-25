@@ -62,7 +62,7 @@ jobs:
         env:
           COSIGN_EXPERIMENTAL: "true"
         run: |
-          echo 'y' | cosign sign-blob site.zip --bundle cosign.bundle
+          echo 'y' | cosign sign-blob site.zip --bundle cosign-site-v${{ github.run_number }}.bundle
           
       - name: Verify the Release Artifact
         env:
@@ -71,7 +71,7 @@ jobs:
           cosign verify-blob site.zip --bundle cosign.bundle --certificate-identity=https://github.com/Miranlfk/app-release-pub/.github/workflows/release.yml@refs/heads/main --certificate-oidc-issuer=https://token.actions.githubusercontent.com
     
       - name: Create Verify Text File
-        run: 'echo "cosign verify-blob site-v${{ github.run_number }} --bundle cosign.bundle --certificate-identity=https://github.com/Miranlfk/app-release-pub/.github/workflows/release.yml@refs/heads/main --certificate-oidc-issuer=https://token.actions.githubusercontent.com" > verify.txt'
+        run: 'echo "cosign verify-blob site-v${{ github.run_number }}.zip --bundle cosign-site-v${{ github.run_number }}.bundle --certificate-identity=https://github.com/Miranlfk/app-release-pub/.github/workflows/release.yml@refs/heads/main --certificate-oidc-issuer=https://token.actions.githubusercontent.com" > verify.txt'
         
       - name: Upload Signature to GitHub release
         uses: actions/upload-release-asset@v1
@@ -90,5 +90,5 @@ jobs:
         with:
           upload_url: ${{ steps.new-test-release-cosign.outputs.upload_url }}
           asset_path: ./cosign.bundle
-          asset_name: cosign.bundle
+          asset_name: cosign-site-v${{ github.run_number }}.bundle
           asset_content_type: application/octet-stream         
