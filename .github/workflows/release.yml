@@ -68,7 +68,7 @@ jobs:
         env:
           COSIGN_EXPERIMENTAL: "true"
         run: |
-          cosign verify-blob site.zip --bundle cosign.bundle --certificate-identity=https://github.com/Miranlfk/app-release-pub/.github/workflows/release.yml@refs/heads/main --certificate-oidc-issuer=https://token.actions.githubusercontent.com
+          cosign verify-blob site.zip --bundle cosign-site-v${{ github.run_number }}.bundle --certificate-identity=https://github.com/Miranlfk/app-release-pub/.github/workflows/release.yml@refs/heads/main --certificate-oidc-issuer=https://token.actions.githubusercontent.com
     
       - name: Create Verify Text File
         run: 'echo "cosign verify-blob site-v${{ github.run_number }}.zip --bundle cosign-site-v${{ github.run_number }}.bundle --certificate-identity=https://github.com/Miranlfk/app-release-pub/.github/workflows/release.yml@refs/heads/main --certificate-oidc-issuer=https://token.actions.githubusercontent.com" > verify.txt'
