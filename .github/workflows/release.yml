@@ -89,6 +89,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.new-test-release-cosign.outputs.upload_url }}
-          asset_path: ./cosign.bundle
+          asset_path: ./cosign-site-v${{ github.run_number }}.bundle
           asset_name: cosign-site-v${{ github.run_number }}.bundle
           asset_content_type: application/octet-stream         
